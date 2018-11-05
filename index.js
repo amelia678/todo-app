@@ -1,4 +1,11 @@
-const personName = 'Amelia';
-console.log(`whaddup ${personName}`);
+const pgp = require('pg-promise')();
+const db = pgp({
+    host: 'localhost',
+    port: 5432, 
+    database: "node-todo-app"
+});
 
-console.log(`that should not have worked correctly`);
+db.any('select * from todos')
+    .then(results => {
+        console.log(results);
+    })
