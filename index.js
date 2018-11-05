@@ -4,7 +4,7 @@ const db = pgp({
     port: 5432, 
     database: "node-todo-app"
 });
-// example of gtabbing all the rows
+// example of grabbing all the rows
 function getAll() {
     return db.any('select * from todos')
         
@@ -54,15 +54,52 @@ function add(name, completed) {
 //         console.log(err);
 //     })
 
+// DELETE
 // example of deleting a row
 function deleteById(id){
     return db.result(`delete from todos where id = $1`, [id])
 }
 
-deleteById(10)   
+// deleteById(10)   
+//     .then(result => {
+//         console.log(result.rowCount);
+//     })
+
+// UPDATE
+function updateName(id, name) {
+    return db.result(`update todos
+        set name=$2
+    where id=$1`, [id, name]);
+}
+updateName(2, 'buy new soul')
     .then(result => {
-        console.log(result.rowCount);
+        console.log(result);
     })
 
+function updateCompleted(id, didComplete) {
+    return db.result(`update todos 
+        set completed=$2
+    where id=$1`, [id, didComplete])
+    
+}
 
 // example of updating a row
+function markCompleted(id) {
+    //return updateCompleted(id, false);
+    return db.result(`update todos 
+	                    set completed=$2
+	                where id=$1`, [id, true]);
+}
+
+function markPending(id) {
+    return updateCompleted(id, false);
+    // return db.result(`update todos 
+    //     set completed=$2
+    // where id=$1`, [id, didComplete])
+
+}
+
+// markCompleted(1)
+//     .then(result => {
+//         console.log(result);
+//     });
