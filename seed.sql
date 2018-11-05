@@ -6,3 +6,13 @@ values
     ('coven meeting', false),
     ('turn back time', false),
     ('meeting with the devil', false);
+
+insert into users
+    (name)
+values  
+    ('amelia'),
+    ('anokhee'),
+    ('cosmo'),
+    ('jerry'),
+    ('george'),
+    ('elaine');
