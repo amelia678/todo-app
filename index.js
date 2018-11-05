@@ -71,10 +71,10 @@ function updateName(id, name) {
         set name=$2
     where id=$1`, [id, name]);
 }
-updateName(2, 'buy new soul')
-    .then(result => {
-        console.log(result);
-    })
+// updateName(2, 'buy new soul')
+//     .then(result => {
+//         console.log(result);
+//     })
 
 function updateCompleted(id, didComplete) {
     return db.result(`update todos 
