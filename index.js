@@ -1,20 +1,23 @@
+require('dotenv').config();
+
+
 const Todo = require('./models/Todo');
 const User = require('./models/User');
 
-Todo.getAll()
-    .then(results => {
-        console.log(results);
-        console.log('yep that all of dems')
-    })
+// User.getAll()
+//     .then(results => {
+//         console.log(results);
+//         console.log('yep that all of dems')
+//     })
 // example of grabbing all the rows
 
 // example of grabbing one row
 
 
-// getById(2)
-//     .then(result => {
-//         console.log(result);
-//     })
+User.getById(2)
+    .then(result => {
+        console.log(result);
+    })
 
 // getById(200)
 //     .then(result => {
@@ -31,7 +34,7 @@ Todo.getAll()
 // example of adding a row
 
 
-// add('crack open a cold one', false)
+// User.add('artemis')
 //     .then(result => {
 //         console.log(result);
 //     })

@@ -1,10 +1,6 @@
-const pgp = require('pg-promise')();
-const db = pgp({
-    host: 'localhost',
-    port: 5432, 
-    database: "node-todo-app"
-});
+const db = require('./db');
 
+// =======================================
 // CREATE
 function add(name) {
     return db.one(`insert into todos (name, completed)
@@ -13,15 +9,27 @@ function add(name) {
         returning id
     `, [name])
 }
+// =======================================
 // RETRIEVE
 function getAll() {
-    return db.any('select * from users')
+    return db.any(`
+    select * from 
+        users
+        right outer join todos t
+        on t.user_id = users.id`)
 } 
 
 function getById(id){
     return db.one('select * from users where id= $1', [id]);
 }
 
+function getTodosForUser(id) {
+    return db.any(`
+        select * from todos
+            where user_id = $1,
+        `, [id]);
+}
+// =======================================
 // UPDATE
 function updateName(id, name) {
     return db.result(`update users
@@ -41,5 +49,6 @@ module.exports = {
     deleteById,
     getAll,
     getById,
+    getTodosForUser,
     updateName
 }
